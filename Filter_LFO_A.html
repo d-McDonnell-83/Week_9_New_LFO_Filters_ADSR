@@ -12,7 +12,7 @@ const ctx = new AudioContext();
 
 //make oscillator
 const osc1 = new OscillatorNode(ctx);
-osc1.frequency.value = 116.5;
+osc1.frequency.value = 55;
 osc1.type = "sawtooth";
 
 const osc1Gain = new GainNode(ctx);
@@ -22,13 +22,13 @@ osc1Gain.gain.value = 0.1;
 
 const filter = new BiquadFilterNode(ctx);
 filter.type = "lowpass";
-filter.frequency.value = 6600;
+filter.frequency.value = 6000;
 filter.Q.value = 20;
 
 //make LFO which changes filter cutoff
 
 const mod = new OscillatorNode(ctx);
-mod.frequency.value = 0.125;
+mod.frequency.value = 1;
 mod.type = "sine";
 
 const modGain = new GainNode(ctx);
@@ -36,6 +36,7 @@ modGain.gain.value = 4000;
 
 mod.connect(modGain);
 modGain.connect(filter.frequency);
+
 osc1.connect(osc1Gain);
 osc1Gain.connect(filter)
 filter.connect(ctx.destination);

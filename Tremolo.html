@@ -14,20 +14,23 @@ const ctx = new AudioContext();
  
 
 const osc1 = new OscillatorNode(ctx);
-osc1.frequency.value = 220;
+osc1.frequency.value = 110;
 osc1.type = "triangle";
 
 const osc1Gain = new GainNode(ctx);
 osc1Gain.gain.value = 0.1;
 
-osc1.connect(osc1Gain);
-osc1Gain.connect(ctx.destination);
 
 const mod = new OscillatorNode(ctx);
-mod.frequency.value = 2; // what happens if you push this above 20Hz?
+mod.type = "sine"
+mod.frequency.value = 48; // what happens if you push this above 20Hz?
 
 const modGain = new GainNode(ctx);
 modGain.gain.value = 1; 
+
+
+osc1.connect(osc1Gain);
+osc1Gain.connect(ctx.destination);
 
 mod.connect(modGain);
 modGain.connect(osc1Gain.gain);
